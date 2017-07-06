@@ -198,9 +198,9 @@ class MLP:
         probs = self.forward(X)
 
         # TODO Calculating the loss
-        
+        data_loss = np.sum(y * np.log(probs))
         # TODO Add regularization term to loss
-        
+        data_loss += (1 / 2) * self.reg_lambda * self.weights ** 2
 
         return 1. / n_samples * data_loss
 
@@ -256,7 +256,8 @@ class MLP:
         n_samples = X.shape[0]
         
         # TODO compute accuracy
-        
+        pred = np.argmax(self.predict(X), axis=1)
+        acc = np.mean(pred == y[:n_samples])
         return acc
 
 
